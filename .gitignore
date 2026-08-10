@@ -9,4 +9,4 @@ profiles.yml
 
 # OS junk
 .DS_Store
-venv/
+venv/data/raw/*.csv
