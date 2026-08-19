@@ -2,20 +2,25 @@ version: 2
 
 models:
   - name: stg_customers
+    description: "Cleaned customer records, including full SCD Type 2 history of risk rating changes."
     columns:
       - name: customer_sk
+        description: "Surrogate key — unique per version of a customer's record."
         tests:
           - unique
           - not_null
 
   - name: stg_transactions
+    description: "Cleaned transaction records, linked to the specific customer version active at transaction time."
     columns:
       - name: transaction_id
+        description: "Unique identifier for each transaction."
         tests:
           - unique
           - not_null
       - name: customer_sk
         tests:
           - relationships:
-              to: ref('stg_customers')
-              field: customer_sk
+              arguments:
+                to: ref('stg_customers')
+                field: customer_sk
